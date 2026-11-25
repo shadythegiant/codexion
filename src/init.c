@@ -45,7 +45,7 @@ static int	init_coders(t_sim *sim)
 		sim->coders[i].left_dongle = &sim->dongles[i];
 		sim->coders[i].right_dongle = &sim->dongles[(i + 1) % sim->num_coders];
 		sim->coders[i].sim = sim;
-		sim->coders[i].last_compile_start = sim->start_time_ms;
+		sim->coders[i].last_compile_start = 0;
 		sim->coders[i].compiles_count = 0;
 		if (pthread_mutex_init(&sim->coders[i].state_mutex, NULL) != 0)
 		{
