@@ -50,7 +50,6 @@ typedef struct s_dongle
 	pthread_cond_t		cond;
 	int					in_use;
 	long long			available_at_ms;
-	unsigned long long	next_seq;
 	t_heap				queue;
 }						t_dongle;
 
@@ -126,8 +125,6 @@ void					sift_up(t_heap *heap, int index, t_sched_type sched);
 void					sift_down(t_heap *heap, int index, t_sched_type sched);
 int						heap_push(t_heap *heap, t_request req,
 							t_sched_type sched);
-int						heap_pop(t_heap *heap, t_sched_type sched,
-							t_request *out);
 
 /* logging */
 void					log_state(t_coder *coder, const char *status);

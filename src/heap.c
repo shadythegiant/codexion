@@ -78,17 +78,3 @@ int	heap_push(t_heap *heap, t_request req, t_sched_type sched)
 	sift_up(heap, heap->size - 1, sched);
 	return (0);
 }
-
-int	heap_pop(t_heap *heap, t_sched_type sched, t_request *out)
-{
-	if (heap->size == 0)
-		return (1);
-	*out = heap->nodes[0];
-	heap->size--;
-	if (heap->size > 0)
-	{
-		heap->nodes[0] = heap->nodes[heap->size];
-		sift_down(heap, 0, sched);
-	}
-	return (0);
-}

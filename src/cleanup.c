@@ -21,7 +21,6 @@ void	destroy_dongles(t_sim *sim, int count)
 	i = 0;
 	while (i < count)
 	{
-		pthread_cond_destroy(&sim->dongles[i].cond);
 		pthread_mutex_destroy(&sim->dongles[i].mutex);
 		free(sim->dongles[i].queue.nodes);
 		sim->dongles[i].queue.nodes = NULL;

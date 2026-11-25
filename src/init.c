@@ -17,7 +17,6 @@ static int	init_one_dongle(t_dongle *d, int id, int capacity)
 	d->id = id;
 	d->in_use = 0;
 	d->available_at_ms = 0;
-	d->next_seq = 0;
 	d->queue.size = 0;
 	d->queue.capacity = capacity;
 	d->queue.nodes = malloc(sizeof(t_request) * capacity);
@@ -25,13 +24,6 @@ static int	init_one_dongle(t_dongle *d, int id, int capacity)
 		return (1);
 	if (pthread_mutex_init(&d->mutex, NULL) != 0)
 	{
-		free(d->queue.nodes);
-		d->queue.nodes = NULL;
-		return (1);
-	}
-	if (pthread_cond_init(&d->cond, NULL) != 0)
-	{
-		pthread_mutex_destroy(&d->mutex);
 		free(d->queue.nodes);
 		d->queue.nodes = NULL;
 		return (1);

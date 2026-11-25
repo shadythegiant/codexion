@@ -34,19 +34,9 @@ void	get_ordered_dongles(t_coder *coder, t_dongle **first, t_dongle **second)
 
 void	wake_all_dongles(t_sim *sim)
 {
-	int	i;
-
 	pthread_mutex_lock(&sim->arb_mutex);
 	pthread_cond_broadcast(&sim->arb_cond);
 	pthread_mutex_unlock(&sim->arb_mutex);
-	i = 0;
-	while (i < sim->num_coders)
-	{
-		pthread_mutex_lock(&sim->dongles[i].mutex);
-		pthread_cond_broadcast(&sim->dongles[i].cond);
-		pthread_mutex_unlock(&sim->dongles[i].mutex);
-		i++;
-	}
 }
 
 void	release_dongle(t_dongle *dongle, t_sim *sim)
@@ -60,7 +50,6 @@ void	release_dongle(t_dongle *dongle, t_sim *sim)
 		sim_set_stop(sim);
 	else
 		dongle->available_at_ms = now + sim->dongle_cooldown;
-	pthread_cond_broadcast(&dongle->cond);
 	pthread_mutex_unlock(&dongle->mutex);
 }
 
