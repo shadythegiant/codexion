@@ -85,6 +85,5 @@ int	enqueue_pair(t_coder *c, t_dongle *first, t_dongle *second, t_request *req)
 		return (0);
 	}
 	pthread_mutex_unlock(&second->mutex);
-	pthread_cond_broadcast(&c->sim->arb_cond);
 	return (1);
 }
